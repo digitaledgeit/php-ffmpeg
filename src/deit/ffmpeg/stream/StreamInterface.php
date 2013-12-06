@@ -8,8 +8,8 @@ namespace deit\ffmpeg\stream;
  */
 interface StreamInterface {
 	
-	const TYPE_AUDIO = 'Audio';
-	const TYPE_VIDEO = 'Video';
+	const TYPE_AUDIO = 'audio';
+	const TYPE_VIDEO = 'video';
 	
 	/**
 	 * Gets the stream type

@@ -43,7 +43,7 @@ class Ffmpeg {
 	public function probe($file) {
 		
 		//don't check the exit code for success, it always returns a failure
-		$exitCode = Process::exec(sprintf("ffmpeg -i %s 2>&1", escapeshellarg($file)), array(
+		$exitCode = Process::exec(sprintf("ffprobe -v quiet -print_format json -show_format -show_streams %s", escapeshellarg($file)), array(
 			'stdout' => $stdout = new \deit\stream\StringOutputStream(),
 			'stderr' => $stderr = new \deit\stream\StringOutputStream(),
 		));

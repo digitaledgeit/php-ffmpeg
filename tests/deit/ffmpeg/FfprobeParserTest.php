@@ -10,7 +10,7 @@ class FfprobeParserTest extends \PHPUnit_Framework_TestCase {
 
 	public function test() {
 		
-		$stdout = file_get_contents(__DIR__.'/../../fixtures/ffprobe-video.txt');
+		$stdout = file_get_contents(__DIR__.'/../../fixtures/ffprobe-video.json');
 		
 		$parser = new FfprobeParser();
 		$result = $parser->parse($stdout);
