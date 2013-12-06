@@ -1,15 +1,15 @@
 <?php
 
-namespace Ffmpeg;
-use Ffmpeg\Stream\Audio;
-use Ffmpeg\Stream\Video;
-use Ffmpeg\Stream\StreamInterface;
+namespace deit\ffmpeg;
+use deit\ffmpeg\stream\Audio;
+use deit\ffmpeg\stream\Video;
+use deit\ffmpeg\stream\StreamInterface;
 
 /**
- * FFMPEG metadata
+ * FFPROBE result
  * @author James Newell <james@digitaledgeit.com.au>
  */
-class Metadata {
+class FfprobeResult {
 		
 	/**
 	 * The metadata

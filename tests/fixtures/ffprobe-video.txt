@@ -1,0 +1,28 @@
+ffprobe version N-47062-g26c531c Copyright (c) 2007-2012 the FFmpeg developers
+  built on Nov 25 2012 12:25:21 with gcc 4.7.2 (GCC)
+  configuration: --enable-gpl --enable-version3 --disable-pthreads --enable-runtime-cpudetect --enable-avisynth --enable-bzlib --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libop
+encore-amrwb --enable-libfreetype --enable-libgsm --enable-libmp3lame --enable-libnut --enable-libopenjpeg --enable-libopus --enable-librtmp --enable-libschroedinger --enable-libspeex --enable-libtheo
+ra --enable-libutvideo --enable-libvo-aacenc --enable-libvo-amrwbenc --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libxavs --enable-libxvid --enable-zlib
+  libavutil      52.  9.100 / 52.  9.100
+  libavcodec     54. 77.100 / 54. 77.100
+  libavformat    54. 37.100 / 54. 37.100
+  libavdevice    54.  3.100 / 54.  3.100
+  libavfilter     3. 23.102 /  3. 23.102
+  libswscale      2.  1.102 /  2.  1.102
+  libswresample   0. 17.101 /  0. 17.101
+  libpostproc    52.  2.100 / 52.  2.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:\uf-checkout.shelley\resource\content\secondary\titles\world-religions\07\32\video\01\video.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: mp42mp41
+    creation_time   : 2013-08-15 09:49:01
+  Duration: 00:06:28.10, start: 0.000000, bitrate: 593 kb/s
+    Stream #0:0(eng): Video: h264 (High) (avc1 / 0x31637661), yuv420p, 704x396 [SAR 1:1 DAR 16:9], 495 kb/s, 25 fps, 25 tbr, 25k tbn, 50 tbc
+    Metadata:
+      creation_time   : 2013-08-15 09:49:01
+      handler_name    : Mainconcept MP4 Video Media Handler
+    Stream #0:1(eng): Audio: aac (mp4a / 0x6134706D), 48000 Hz, stereo, s16, 94 kb/s
+    Metadata:
+      creation_time   : 2013-08-15 09:49:01
+      handler_name    : Mainconcept MP4 Sound Media Handler

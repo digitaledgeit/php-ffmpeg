@@ -1,6 +1,6 @@
 <?php
 
-namespace Ffmpeg\Stream;
+namespace deit\ffmpeg\stream;
 
 /**
  * FFMPEG stream

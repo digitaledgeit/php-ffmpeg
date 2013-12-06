@@ -1,13 +1,17 @@
 <?php
 
-namespace Ffmpeg\Stream;
+namespace deit\ffmpeg\stream;
 
 /**
  * FFMPEG stream
  * @author James Newell <james@digitaledgeit.com.au>
  */
 class Video extends AbstractStream {
-			
+
+	const SAR_1TO1 	= '1:1';
+	const DAR_4TO3 	= '4:3';
+	const DAR_16TO9 = '16:9';
+	
 	/**
 	 * Parses the detail line
 	 * @param 	Video $video
@@ -21,10 +25,12 @@ class Video extends AbstractStream {
 				$video->setFramesPerSecond($matches[1]);
 			}
 			
-			if (preg_match('#([0-9]+)x([0-9]+)#', $detail, $matches) > 0) {
+			if (preg_match('#([0-9]+)x([0-9]+) \[SAR ([0-9]+:[0-9]+) DAR ([0-9]+:[0-9]+)\]#', $detail, $matches) > 0) {
 				$video
 					->setWidth($matches[1])
 					->setHeight($matches[2])
+					->setStorageAspectRatio($matches[3])
+					->setDisplayAspectRatio($matches[4])
 				;
 			}
 			
@@ -49,6 +55,18 @@ class Video extends AbstractStream {
 	 * @var 	int
 	 */
 	private $height;
+	
+	/**
+	 * Gets the storage aspect ratio
+	 * @var 	string
+	 */
+	private $sar;
+		
+	/**
+	 * Gets the display aspect ratio
+	 * @var 	string
+	 */
+	private $dar;
 	
 	/**
 	 * @inheritsdoc
@@ -84,7 +102,7 @@ class Video extends AbstractStream {
 	}
 	
 	/**
-	 * Gets the width
+	 * Sets the width
 	 * @param 	int $width
 	 * @return 	$this
 	 */
@@ -102,12 +120,48 @@ class Video extends AbstractStream {
 	}
 		
 	/**
-	 * Gets the height
+	 * Sets the height
 	 * @param 	int $height
 	 * @return 	$this
 	 */
 	public function setHeight($height) {
 		$this->height = (int) $height;
+		return $this;
+	}
+					
+	/**
+	 * Gets the storage aspect ratio
+	 * @return 	string
+	 */
+	public function getStorageAspectRatio() {
+		return $this->sar;
+	}
+		
+	/**
+	 * Sets the storage aspect ratio
+	 * @param 	string $sar
+	 * @return 	$this
+	 */
+	public function setStorageAspectRatio($sar) {
+		$this->sar = (string) $sar;
+		return $this;
+	}
+		
+	/**
+	 * Gets the display aspect ratio
+	 * @return 	string
+	 */
+	public function getDisplayAspectRatio() {
+		return $this->dar;
+	}
+		
+	/**
+	 * Sets the display aspect ratio
+	 * @param 	string $dar
+	 * @return 	$this
+	 */
+	public function setDisplayAspectRatio($dar) {
+		$this->dar = (string) $dar;
 		return $this;
 	}
 	

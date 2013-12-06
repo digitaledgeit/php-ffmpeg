@@ -1,19 +1,19 @@
 <?php
 
-namespace Ffmpeg;
+namespace deit\ffmpeg;
 
-use Ffmpeg\Stream\Video;
-use Ffmpeg\Stream\Audio;
-use Ffmpeg\Stream\StreamInterface;
+use deit\ffmpeg\stream\Video;
+use deit\ffmpeg\stream\Audio;
+use deit\ffmpeg\stream\StreamInterface;
 
 use deit\process\Process;
 use deit\stream\StringOutputStream;
 
 /**
- * FFMPEG wrapper
+ * FFPROBE wrapper
  * @author James Newell <james@digitaledgeit.com.au>
  */
-class Ffmpeg {
+class FfprobeParser {
 	
 	/**
 	 * The FFMPEG command path
@@ -36,24 +36,13 @@ class Ffmpeg {
 	}
 	
 	/**
-	 * Gets the metadata
-	 * @param 	string $file
-	 * @return 	Metadata
+	 * Gathers information from multimedia streams
+	 * @param 	string $stdout
+	 * @return 	FfprobeResult
 	 */
-	public function getMetadata($file) {
+	public function parse($stdout) {
 		
-		//don't check the exit code for success, it always returns a failure
-		$exitCode = Process::exec(sprintf("ffmpeg -i %s 2>&1", escapeshellarg($file)), array(
-			'stdout' => $stdout = new \deit\stream\StringOutputStream(),
-			'stderr' => $stderr = new \deit\stream\StringOutputStream(),
-		));
-
-		//check for an unknown command - http://tldp.org/LDP/abs/html/exitcodes.html#EXITCODESREF
-		if ($exitCode == 127) { 
-			throw new \Exception('An error occured whilst fetching media metadata: '.$stdout);	
-		}
-		
-		//split the output into
+		//split the output into lines
 		$lines = explode(PHP_EOL, (string) $stdout);
 		
 		//skip to the start of the input
@@ -86,7 +75,7 @@ class Ffmpeg {
 	 * @param 	string[] $lines
 	 */
 	private function parseInputSection($lines, &$i) {
-		$md = new Metadata();
+		$md = new FfprobeResult();
 		
 		//gets the input line
 		$line = $lines[$i];
@@ -119,7 +108,7 @@ class Ffmpeg {
 	 * Parses the metadata section
 	 * @param 	string[] $lines
 	 */
-	private function parseMetadataSection($lines, &$i, Metadata $md) {
+	private function parseMetadataSection($lines, &$i, FfprobeResult $md) {
 		
 		//gets the metadata line
 		$line = $lines[$i];
@@ -148,7 +137,7 @@ class Ffmpeg {
 	 * Parses the duration section
 	 * @param 	string[] $lines
 	 */
-	private function parseDurationSection($lines, &$i, Metadata $md) {
+	private function parseDurationSection($lines, &$i, FfprobeResult $md) {
 		$indent = 2;
 				
 		//gets the duration line
@@ -176,7 +165,7 @@ class Ffmpeg {
 	 * Parses the stream section
 	 * @param 	string[] $lines
 	 */
-	private function parseStreamSection($lines, &$i, Metadata $md) {
+	private function parseStreamSection($lines, &$i, FfprobeResult $md) {
 		$indent = 4;
 		
 		//gets the stream line
