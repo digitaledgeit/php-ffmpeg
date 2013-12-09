@@ -52,9 +52,9 @@ class Ffmpeg {
 		if ($exitCode == 127) { 
 			throw new \Exception('An error occured whilst fetching media metadata: '.$stdout);	
 		}
-		
+
 		$parser = new FfProbeParser();
-		return $parser->parse($stdout);
+		return $parser->parse((string)$stdout);
 	}
 	
 }

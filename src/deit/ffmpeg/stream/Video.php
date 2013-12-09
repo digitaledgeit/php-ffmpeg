@@ -8,41 +8,32 @@ namespace deit\ffmpeg\stream;
  */
 class Video extends AbstractStream {
 
-	const SAR_1TO1 	= '1:1';
-	const DAR_4TO3 	= '4:3';
-	const DAR_16TO9 = '16:9';
-	
+	const PROFILE_HIGH  = 'High';
+
+	const LEVEL_41      = 41;
+
+	const SAR_1TO1 	    = '1:1';
+
+	const DAR_4TO3 	    = '4:3';
+	const DAR_16TO9     = '16:9';
+
 	/**
-	 * Parses the detail line
-	 * @param 	Video $video
-	 * @param 	string[]
+	 * The profile
+	 * @var 	string
 	 */
-	public static function parseDetail(Video $video, array $details) {
-		
-		foreach ($details as $detail) {
-			
-			if (preg_match('#([0-9]+) fps#', $detail, $matches) > 0) {
-				$video->setFramesPerSecond($matches[1]);
-			}
-			
-			if (preg_match('#([0-9]+)x([0-9]+) \[SAR ([0-9]+:[0-9]+) DAR ([0-9]+:[0-9]+)\]#', $detail, $matches) > 0) {
-				$video
-					->setWidth($matches[1])
-					->setHeight($matches[2])
-					->setStorageAspectRatio($matches[3])
-					->setDisplayAspectRatio($matches[4])
-				;
-			}
-			
-		}
-		
-	}
-	
+	private $profile;
+
 	/**
-	 * The frames per second
+	 * The level
 	 * @var 	int
 	 */
-	private $fps;
+	private $level;
+
+	/**
+	 * The frames rate
+	 * @var 	int
+	 */
+	private $frameRate;
 	
 	/**
 	 * The width
@@ -74,22 +65,76 @@ class Video extends AbstractStream {
 	public function getType() {
 		return self::TYPE_VIDEO;
 	}
-	
+
 	/**
-	 * Gets the FPS
+	 * Gets the codec
+	 * @return 	string
+	 */
+	public function getCodec() {
+		return $this->codec;
+	}
+
+	/**
+	 * Sets the codec
+	 * @param 	int $codec
+	 * @return 	$this
+	 */
+	public function setCodec($codec) {
+		$this->codec = (string) $codec;
+		return $this;
+	}
+
+	/**
+	 * Gets the profile
+	 * @return 	string
+	 */
+	public function getProfile() {
+		return $this->profile;
+	}
+
+	/**
+	 * Sets the profile
+	 * @param 	string $profile
+	 * @return 	$this
+	 */
+	public function setProfile($profile) {
+		$this->profile = (string) $profile;
+		return $this;
+	}
+
+	/**
+	 * Gets the level
 	 * @return 	int
 	 */
-	public function getFramesPerSecond() {
-		return $this->fps;
+	public function getLevel() {
+		return $this->level;
+	}
+
+	/**
+	 * Sets the level
+	 * @param 	int $level
+	 * @return 	$this
+	 */
+	public function setLevel($level) {
+		$this->level = (int) $level;
+		return $this;
+	}
+
+	/**
+	 * Gets the frame rate
+	 * @return 	int
+	 */
+	public function getFrameRate() {
+		return $this->frameRate;
 	}
 	
 	/**
-	 * Sets the FPS
-	 * @param 	int $fps
+	 * Sets the frame rate
+	 * @param 	int $rate
 	 * @return 	$this
 	 */
-	public function setFramesPerSecond($fps) {
-		$this->fps = (int) $fps;
+	public function setFrameRate($rate) {
+		$this->frameRate = (int) $rate;
 		return $this;
 	}
 	

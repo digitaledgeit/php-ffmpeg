@@ -45,7 +45,7 @@ class FfprobeParser {
 		
 		//decode the JSON
 		$json = json_decode($stdout);
-		
+
 		foreach ($json->streams as $jsonStream) {
 			
 			if ($jsonStream->codec_type == StreamInterface::TYPE_VIDEO) {
@@ -61,14 +61,72 @@ class FfprobeParser {
 		
 		return $result;
 	}
-	
-	public function parseVideoStream($json) {
-		$stream = new Video();
-		return $stream;
-	}
-	
+
+	/**
+	 * Parses the audio stream
+	 * @param   mixed $json
+	 * @return  Audio
+	 */
 	public function parseAudioStream($json) {
 		$stream = new Audio();
+
+		//set the codec
+		$stream
+			->setCodec($json->codec_name)
+		;
+
+		//set the channels
+		$stream
+			->setChannels($json->channels)
+		;
+
+		//set the sample rate
+		$stream
+			->setSampleRate($json->sample_rate)
+		;
+
+		//set the bit rate
+		$stream
+			->setBitRate($json->bit_rate)
+		;
+
+		return $stream;
+	}
+
+	/**
+	 * Parses the video stream
+	 * @param   mixed $json
+	 * @return  Video
+	 */
+	public function parseVideoStream($json) {
+		$stream = new Video();
+
+		//set the codec
+		$stream
+			->setCodec($json->codec_name)
+		;
+
+		//set the profile
+		if (isset($json->profile)) {
+			$stream->setProfile($json->profile);
+		}
+
+		//set the level
+		if (isset($json->level)) {
+			$stream->setLevel($json->level);
+		}
+
+		//set the frame rate
+		$arg    = explode('/', $json->avg_frame_rate);
+		$stream->setFrameRate((int) $arg[0] / (int) $arg[1]);
+
+		//set the width and height
+		$stream
+			->setWidth($json->width)
+			->setHeight($json->height)
+			->setDisplayAspectRatio($json->display_aspect_ratio)
+		;
+
 		return $stream;
 	}
 	
