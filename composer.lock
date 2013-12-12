@@ -54,12 +54,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/digitaledgeit/php-process.git",
-                "reference": "d8912cb3d9e97836f04f9718f2829259bc4dea6e"
+                "reference": "7732fbea1fa19e15475cd4086860ab2fe7513d0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/digitaledgeit/php-process/zipball/d8912cb3d9e97836f04f9718f2829259bc4dea6e",
-                "reference": "d8912cb3d9e97836f04f9718f2829259bc4dea6e",
+                "url": "https://api.github.com/repos/digitaledgeit/php-process/zipball/7732fbea1fa19e15475cd4086860ab2fe7513d0f",
+                "reference": "7732fbea1fa19e15475cd4086860ab2fe7513d0f",
                 "shasum": ""
             },
             "require": {
@@ -91,7 +91,7 @@
             "keywords": [
                 "process"
             ],
-            "time": "2013-11-26 01:23:17"
+            "time": "2013-12-12 22:56:03"
         },
         {
             "name": "digitaledgeit/stream",
@@ -99,12 +99,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/digitaledgeit/php-stream.git",
-                "reference": "a465279eccfde512eedbd182b2751b78e6b26711"
+                "reference": "dd6fc1f8c47108926a4dda7227960be1cc842cda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/digitaledgeit/php-stream/zipball/a465279eccfde512eedbd182b2751b78e6b26711",
-                "reference": "a465279eccfde512eedbd182b2751b78e6b26711",
+                "url": "https://api.github.com/repos/digitaledgeit/php-stream/zipball/dd6fc1f8c47108926a4dda7227960be1cc842cda",
+                "reference": "dd6fc1f8c47108926a4dda7227960be1cc842cda",
                 "shasum": ""
             },
             "require": {
@@ -134,7 +134,7 @@
             "keywords": [
                 "stream"
             ],
-            "time": "2013-11-26 01:04:31"
+            "time": "2013-12-12 06:59:18"
         }
     ],
     "packages-dev": [
@@ -467,12 +467,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "8ce9c35f7aa1fc040f9e92f164d1ba9550eb0be9"
+                "reference": "a1a2f93ebf2677ca2bf292a925095f457cd960a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/8ce9c35f7aa1fc040f9e92f164d1ba9550eb0be9",
-                "reference": "8ce9c35f7aa1fc040f9e92f164d1ba9550eb0be9",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/a1a2f93ebf2677ca2bf292a925095f457cd960a5",
+                "reference": "a1a2f93ebf2677ca2bf292a925095f457cd960a5",
                 "shasum": ""
             },
             "require": {
@@ -517,7 +517,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2013-12-04 00:24:39"
+            "time": "2013-12-12 22:23:57"
         },
         {
             "name": "sebastian/diff",

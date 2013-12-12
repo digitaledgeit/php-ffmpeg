@@ -2,10 +2,6 @@
 
 namespace deit\ffmpeg;
 
-use deit\ffmpeg\stream\Video;
-use deit\ffmpeg\stream\Audio;
-use deit\ffmpeg\stream\StreamInterface;
-
 use deit\process\Process;
 use deit\stream\StringOutputStream;
 
@@ -37,24 +33,26 @@ class Ffmpeg {
 	
 	/**
 	 * Gathers information from multimedia streams
-	 * @param 	string $file
-	 * @return 	Metadata
+	 * @param 	string  $file
+	 * @return 	FfprobeResult
+	 * @throws
 	 */
 	public function probe($file) {
-		
-		//don't check the exit code for success, it always returns a failure
-		$exitCode = Process::exec(sprintf("ffprobe -v quiet -print_format json -show_format -show_streams %s", escapeshellarg($file)), array(
-			'stdout' => $stdout = new \deit\stream\StringOutputStream(),
-			'stderr' => $stderr = new \deit\stream\StringOutputStream(),
+
+		//run ffprobe
+		$cmd = sprintf("ffprobe -print_format json -show_format -show_streams %s", escapeshellarg($file));
+		$exitCode = Process::exec($cmd, array(
+			'stdout' => $stdout = new StringOutputStream(),
+			'stderr' => $stderr = new StringOutputStream(),
 		));
 
-		//check for an unknown command - http://tldp.org/LDP/abs/html/exitcodes.html#EXITCODESREF
-		if ($exitCode == 127) { 
-			throw new \Exception('An error occured whilst fetching media metadata: '.$stdout);	
+		//check the command was successful
+		if ($exitCode != Process::EXIT_SUCCESS) {
+			throw new \Exception('An error occured whilst inspecting the media: '.$stderr);
 		}
 
 		$parser = new FfProbeParser();
-		return $parser->parse((string)$stdout);
+		return $parser->parse((string) $stdout);
 	}
 	
 }

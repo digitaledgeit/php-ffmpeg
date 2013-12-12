@@ -37,14 +37,18 @@ class FfprobeParser {
 	
 	/**
 	 * Parses information from multimedia streams
-	 * @param 	string $stdout
+	 * @param 	string $output
 	 * @return 	FfprobeResult
+	 * @throws
 	 */
-	public function parse($stdout) {
+	public function parse($output) {
 		$result = new FfprobeResult();
 		
 		//decode the JSON
-		$json = json_decode($stdout);
+		if (empty($output) || ($json = json_decode($output)) == false) {
+			var_dump($output);
+			throw new \InvalidArgumentException('Unable to parse ffprobe output');
+		}
 
 		foreach ($json->streams as $jsonStream) {
 			
