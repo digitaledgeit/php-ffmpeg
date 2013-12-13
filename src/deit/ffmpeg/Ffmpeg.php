@@ -40,7 +40,7 @@ class Ffmpeg {
 	public function probe($file) {
 
 		//run ffprobe
-		$cmd = sprintf("ffprobe -print_format json -show_format -show_streams %s", escapeshellarg($file));
+		$cmd = sprintf("ffprobe -v quiet -print_format json -show_format -show_streams %s", escapeshellarg($file));
 		$exitCode = Process::exec($cmd, array(
 			'stdout' => $stdout = new StringOutputStream(),
 			'stderr' => $stderr = new StringOutputStream(),
