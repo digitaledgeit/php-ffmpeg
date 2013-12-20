@@ -43,10 +43,9 @@ class FfprobeParser {
 	 */
 	public function parse($output) {
 		$result = new FfprobeResult();
-		
+
 		//decode the JSON
 		if (empty($output) || ($json = json_decode($output)) == false) {
-			var_dump($output);
 			throw new \InvalidArgumentException('Unable to parse ffprobe output');
 		}
 
@@ -79,6 +78,9 @@ class FfprobeParser {
 			->setCodec($json->codec_name)
 		;
 
+		//set the duration
+		$stream->setDuration($json->duration);
+
 		//set the channels
 		$stream
 			->setChannels($json->channels)
@@ -104,11 +106,14 @@ class FfprobeParser {
 	 */
 	public function parseVideoStream($json) {
 		$stream = new Video();
-
+		
 		//set the codec
 		$stream
 			->setCodec($json->codec_name)
 		;
+
+		//set the duration
+		$stream->setDuration($json->duration);
 
 		//set the profile
 		if (isset($json->profile)) {
@@ -122,7 +127,10 @@ class FfprobeParser {
 
 		//set the frame rate
 		$arg    = explode('/', $json->avg_frame_rate);
-		$stream->setFrameRate((int) $arg[0] / (int) $arg[1]);
+		if ($arg[1] != 0) { //fixme: warn for an invalid frame rate?
+			$stream->setFrameRate((int) $arg[0] / (int) $arg[1]);
+		}
+
 
 		//set the width and height
 		$stream

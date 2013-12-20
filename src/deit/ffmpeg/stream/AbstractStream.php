@@ -14,7 +14,17 @@ abstract class AbstractStream implements StreamInterface {
 	 */
 	private $codec;
 
+	/**
+	 * The metadata
+	 * @var     string[string]
+	 */
 	private $metadata;
+
+	/**
+	 * The duration
+	 * @var     float
+	 */
+	private $duration;
 
 	/**
 	 * Gets the codec
@@ -42,5 +52,23 @@ abstract class AbstractStream implements StreamInterface {
 		$this->metadata = $metadata;
 		return $this;
 	}
-	
+
+	/**
+	 * Gets the duration
+	 * @return 	int
+	 */
+	public function getDuration() {
+		return $this->duration;
+	}
+
+	/**
+	 * Sets the duration
+	 * @param 	float $duration
+	 * @return 	$this
+	 */
+	public function setDuration($duration) {
+		$this->duration = (float) $duration;
+		return $this;
+	}
+
 }

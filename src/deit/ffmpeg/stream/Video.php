@@ -67,24 +67,6 @@ class Video extends AbstractStream {
 	}
 
 	/**
-	 * Gets the codec
-	 * @return 	string
-	 */
-	public function getCodec() {
-		return $this->codec;
-	}
-
-	/**
-	 * Sets the codec
-	 * @param 	int $codec
-	 * @return 	$this
-	 */
-	public function setCodec($codec) {
-		$this->codec = (string) $codec;
-		return $this;
-	}
-
-	/**
 	 * Gets the profile
 	 * @return 	string
 	 */
